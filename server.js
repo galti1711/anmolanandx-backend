@@ -3,6 +3,7 @@ import cors from "cors";
 const app=express(), PORT=process.env.PORT||3000;
 app.use(cors({origin:process.env.FRONTEND_ORIGIN||"https://anmolanandxvideodownloader.edgeone.dev"}));
 app.use(express.json({limit:"10kb"}));
+app.use(express.static("public"));
 app.get("/api/health",(_req,res)=>res.json({ok:true,service:"ANMOLANANDX backend",status:"running"}));
 app.get("/",(_req,res)=>res.json({ok:true,service:"ANMOLANANDX backend",status:"running"}));
 function platformOf(raw){
