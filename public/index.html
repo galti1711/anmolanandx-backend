@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ANMOLANANDX Downloader</title>
+</head>
+<body>
+  <h1>ANMOLANANDX</h1>
+  <input id="url" placeholder="Paste public/authorized video URL">
+  <button onclick="checkLink()">Check Link</button>
+  <p id="result"></p>
+
+  <script>
+    async function checkLink() {
+      const url = document.getElementById("url").value;
+      const result = document.getElementById("result");
+
+      result.textContent = "Checking...";
+
+      try {
+        const response = await fetch("/api/check-link", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({url})
+        });
+
+        const data = await response.json();
+        result.textContent = data.message || data.error || "Done";
+      } catch {
+        result.textContent = "Backend connection failed.";
+      }
+    }
+  </script>
+</body>
+</html>
