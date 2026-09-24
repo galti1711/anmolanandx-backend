@@ -21,5 +21,10 @@ app.post("/api/check-link",(req,res)=>{
  if(!platform)return res.status(400).json({ok:false,error:"Enter a valid http/https URL."});
  if(platform==="unsupported")return res.status(422).json({ok:false,platform,message:"This platform is not supported yet."});
  res.json({ok:true,platform,message:`${platform} link recognized. Download integration is not configured yet.`,downloadable:false});
+});app.get("/api/download", (_req, res) => {
+  res.status(501).json({
+    ok: false,
+    message: "Download source is not configured yet."
+  });
 });
 app.listen(PORT,"0.0.0.0",()=>console.log(`Backend listening on ${PORT}`));
